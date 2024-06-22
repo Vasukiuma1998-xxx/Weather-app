@@ -4,8 +4,8 @@ function Weather(){
     const [city,setcity]=useState("")
     const [weather,setweather]=useState("")
     const [temp,settemperature]=useState("")
-    const [desc,setdesc]=useState()
-
+    const [desc,setdesc]=useState("")
+    
 
     function handlecity(evt){
         setcity(evt.target.value)
@@ -15,9 +15,11 @@ var weatherdata=axios(`https://api.openweathermap.org/data/2.5/weather?q=${city}
 weatherdata.then(function(success){
     console.log(success.data)
     setweather(success.data.weather[0].main)
-   setdesc
-   (success.data.weather[0].description)
+   setdesc(success.data.weather[0].description)
    settemperature(success.data.main.temp)
+})
+.catch(function(error){
+    alert("Please enter the valid city name")
 })
     }
     return(
